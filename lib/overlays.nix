@@ -2,7 +2,7 @@
 { ... }:
 {
   mkOverlay =
-    packagePath: callPackageFunction: final: prev:
+    packagePath: callPackageFunction: callPackageFunctionArgs: final: prev:
     let
       len = builtins.length packagePath;
       atDepth =
@@ -12,7 +12,7 @@
         in
         # Leaf: just create the package
         if n == len then
-          final.callPackage callPackageFunction { }
+          final.callPackage callPackageFunction callPackageFunctionArgs
         else
           {
             ${name} =

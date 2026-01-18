@@ -11,5 +11,6 @@
     ./mavlink.nix
     ./protobuf.nix
     ./python.nix
+    ./rust/default.nix
   ];
 }

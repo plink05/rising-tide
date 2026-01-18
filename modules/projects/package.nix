@@ -19,6 +19,10 @@ in
       type = types.nullOr risingTideLib.types.callPackageFunction;
       default = null;
     };
+    callPackageFunctionArgs = lib.mkOption {
+      type = types.attrs;
+      default = {};
+    };
     package = lib.mkOption {
       type = types.nullOr types.package;
       default = null;
@@ -26,7 +30,7 @@ in
     };
   };
   config = lib.mkIf (config.callPackageFunction != null) {
-    overlay = risingTideLib.mkOverlay config.fullyQualifiedPackagePath config.callPackageFunction;
+    overlay = risingTideLib.mkOverlay config.fullyQualifiedPackagePath config.callPackageFunction config.callPackageFunctionArgs;
     package = lib.getAttrFromPath config.fullyQualifiedPackagePath pkgs;
     packages.${config.packageName} = config.package;
     mkShell.inputsFrom = [ config.package ];
